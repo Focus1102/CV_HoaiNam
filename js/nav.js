@@ -128,14 +128,14 @@ function setupLogoClickHandler() {
             document.body.classList.add('page-transition');
             
             // Kiểm tra xem đang ở trang chính hay trang con
-            const isMainPage = window.location.pathname.endsWith('cv.html') || window.location.pathname.endsWith('/');
+            const isMainPage = window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/');
             
             if (isMainPage) {
                 // Nếu đang ở trang chính, tải lại trang
                 window.location.reload();
             } else {
                 // Điều hướng về trang chính
-                window.location.href = isMainPage ? 'cv.html' : '../cv.html';
+                window.location.href = isMainPage ? 'index.html' : '../index.html';
             }
         });
     }
@@ -147,11 +147,11 @@ function navigateTo(path) {
     document.body.classList.add('page-transition');
     
     // Kiểm tra xem đang ở trang chính hay trang con
-    const isMainPage = window.location.pathname.endsWith('cv.html') || window.location.pathname.endsWith('/');
+    const isMainPage = window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/');
     
-    if (path === 'cv.html' || path === '/cv.html' || path === '/') {
+    if (path === 'index.html' || path === '/index.html' || path === '/') {
         // Nếu điều hướng đến trang chính, tải lại toàn bộ trang
-        window.location.href = isMainPage ? 'cv.html' : '../cv.html';
+        window.location.href = isMainPage ? 'index.html' : '../index.html';
         return;
     }
     
@@ -234,7 +234,7 @@ function navigateTo(path) {
 // Xử lý nút quay lại/trước trên trình duyệt
 window.addEventListener('popstate', function() {
     const currentPath = window.location.pathname;
-    const isMainPage = currentPath.endsWith('cv.html') || currentPath.endsWith('/');
+    const isMainPage = currentPath.endsWith('index.html') || currentPath.endsWith('/');
     
     if (isMainPage) {
         // Nếu đang ở trang chính, tải lại toàn bộ CV
@@ -252,7 +252,7 @@ function setActiveNavItem() {
     const navItems = document.querySelectorAll('.nav-link');
     // Lấy tên trang hiện tại từ URL
     const currentPath = window.location.pathname;
-    const currentPage = currentPath.split('/').pop() || 'cv.html';
+    const currentPage = currentPath.split('/').pop() || 'index.html';
     
     navItems.forEach(item => {
         const href = item.getAttribute('href');
