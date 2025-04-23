@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HoaiNam</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/cv.css">
+    <link rel="icon" type="image/png" href="assets/logo.png">
+    <style>
+        /* Page transition effect */
+        body.page-transition main {
+            opacity: 0.5;
+            transition: opacity 0.3s ease;
+        }
+        main {
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div id="nav-container"></div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="contact">
+            <div class="profile-picture">
+                <img src="assets/Nam.png" alt="Profile Picture" loading="lazy">
+            </div>
+            <div class="contact-content">
+                <h1>Vu Phan Hoai Nam</h1>
+                <p>Intern JavaScript Developer</p>
+                <div class="contact-info">
+                    <p><i class="bi bi-envelope-fill me-2"></i><a href="mailto:nam.vuphanhoai@gmail.com">nam.vuphanhoai@gmail.com</a></p>
+                    <p><i class="bi bi-telephone-fill me-2"></i>0985518643</p>
+                    <p><i class="bi bi-geo-alt-fill me-2"></i>Thu Duc, Ho Chi Minh City</p>
+                    <p><i class="bi bi-github me-2"></i><a href="https://github.com/Focus1102" target="_blank" rel="noopener noreferrer">GitHub: Focus1102</a></p>
+                </div>
+            </div>
+        </section>
+
+        <section id="education">
+            <h2>EDUCATION</h2>
+            <p><strong>Gia Dinh University | 06/2022 - Present</strong></p>
+            <p>Throughout my studies, I have been trained in Object-Oriented Programming, Software Design Patterns, 
+                and Software Construction using Java. I also gained experience in Web Development (HTML5, CSS3, Node.js, Vue3), 
+                GUI development with C#, and Mobile Programming with Android Studio. My coursework included Data Structures and Algorithms, 
+                as well as Application Design with Python. I have worked with various databases such as SQL Server, MySQL, XAMPP, and MongoDB. 
+                These subjects have equipped me with a solid foundation in both frontend and backend development.</p>
+        </section>
+
+        <section id="skills">
+            <h2>SKILLS</h2>
+            <ul>
+                <li><strong>Programming Languages:</strong>JavaScript, Java</li>
+                <li><strong>Frontend:</strong>HTML5, CSS3, Vue3</li>
+                <li><strong>Backend:</strong>Node.js, Java Spring MVC, Java Spring Boot</li>
+                <li><strong>Database:</strong>MongoDB, MySQL, SQL Sever</li>
+                <li><strong>Tools:</strong>Visual Studio Code, IntelliJ IDEA, Postman, Git, Github</li>
+                <li><strong>Soft Skills:</strong>Proactive learning, adaptability, teamwork, basic English communication</li>
+            </ul>
+        </section>
+
+        <section id="career-objective">
+            <h2>CAREER OBJECTIVE</h2>
+            <p>As a final-year Software Engineering student at Gia Dinh University, I am passionate about web development and eager to 
+                contribute to your company as an intern. With hands-on experience in Vue 3, HTML5, CSS3, and Node.js, I am looking forward 
+                to enhancing my technical skills, gaining real-world experience in professional software development, and developing strong teamwork abilities.</p>
+            <p>My goal over the next 3-6 months is to build a solid foundation in both front-end and back-end development, quickly adapt to the company's workflow, 
+                and bring value through proactive learning and dedication. I look forward to growing with the company and hope to transition from an intern to 
+                a full-time team member in the future</p>
+        </section>
+
+        <section id="personal-projects">
+            <h2>PERSONAL PROJECT</h2>
+            <p><strong>Cake Selling Website</strong> (01/2025 - 03/2025)</p>
+            <ul>
+                <li><i class="bi bi-info-circle me-2"></i><strong>Description:</strong> Designed and developed an e-commerce platform with user authentication, shopping cart, order management, admin dashboard, and email notifications</li>
+                <li><i class="bi bi-code-slash me-2"></i><strong>Technologies:</strong> Vue3, Node.js, Express.js, MongoDB, RESTful API, JWT, Nodemailer</li>
+                <li><i class="bi bi-github me-2"></i><strong>GitHub:</strong> <a href="https://github.com/Focus1102/Cake-Selling-Website" target="_blank">https://github.com/Focus1102/Cake-Selling-Website</a></li>
+            </ul>
+        </section>
+
+        <section id="external-work-experience">
+            <h2>EXTERNAL WORK EXPERIENCE</h2>
+            <ul>
+                <li><i class="bi bi-check2-circle me-2"></i>Part-time waiter at a wedding restaurant</li>
+                <li><i class="bi bi-check2-circle me-2"></i>Part-time barista milk tea, coffee</li>
+                <li><i class="bi bi-check2-circle me-2"></i>Electrical network installation worker</li>
+                <li><i class="bi bi-check2-circle me-2"></i>Camera system installation worker</li>
+                <li><i class="bi bi-check2-circle me-2"></i>LED signboard installation worker</li>
+                <li><i class="bi bi-check2-circle me-2"></i>Supervisor for interior construction and office renovation</li>
+            </ul>
+        </section>
+
+        <div class="export-container">
+            <button id="exportfile" class="btn btn-primary"><i class="bi bi-file-earmark-word me-2"></i>Export File Word</button>
+        </div>
+    </main>
+    
+    <footer class="container-fluid">
+        <p>&copy;<strong> 2025 Vu Phan Hoai Nam. All rights reserved!</strong></p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/docx@7.8.2/build/index.js"></script>
+    <!-- Load navigation JS first -->
+    <script src="js/nav.js"></script>
+    <!-- Then load CV-specific JS -->
+    <script src="js/cv.js"></script>
+</body>
+</html>

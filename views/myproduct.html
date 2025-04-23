@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Products - HoaiNam</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../css/cv.css">
+    <link rel="icon" type="image/png" href="../assets/logo.png">
+    <style>
+        /* Page transition effect */
+        body.page-transition main {
+            opacity: 0.5;
+            transition: opacity 0.3s ease;
+        }
+        main {
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div id="nav-container"></div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="my-products">
+            <h2><i class="bi bi-laptop me-2"></i>MY PRODUCTS</h2>
+            <div class="product-item">
+                <h3><i class="bi bi-cake2 me-2"></i>Cake Selling Website</h3>
+                <p class="period"><i class="bi bi-calendar-date me-2"></i>01/2025 - 03/2025</p>
+                <div class="product-details">
+                    <ul>
+                        <li><i class="bi bi-info-circle me-2"></i><strong>Description:</strong> Designed and developed an e-commerce platform with user authentication, shopping cart, order management, admin dashboard, and email notifications</li>
+                        <li><i class="bi bi-code-slash me-2"></i><strong>Technologies:</strong> Vue3, Node.js, Express.js, MongoDB, RESTful API, JWT, Nodemailer</li>
+                        <li><i class="bi bi-github me-2"></i><strong>GitHub:</strong> <a href="https://github.com/Focus1102/Cake-Selling-Website" target="_blank">https://github.com/Focus1102/Cake-Selling-Website</a></li>
+                    </ul>
+                </div>
+                <div class="product-image">
+                    <img src="../assets/cake-website.jpg" alt="Cake Selling Website Screenshot" onerror="this.src='../assets/placeholder.png'; this.onerror=null;">
+                </div>
+            </div>
+            
+            <div class="product-item">
+                <h3><i class="bi bi-briefcase me-2"></i>Portfolio Website</h3>
+                <p class="period"><i class="bi bi-calendar-date me-2"></i>04/2025 - 06/2025</p>
+                <div class="product-details">
+                    <ul>
+                        <li><i class="bi bi-info-circle me-2"></i><strong>Description:</strong> Created a responsive personal portfolio website to showcase my projects and skills</li>
+                        <li><i class="bi bi-code-slash me-2"></i><strong>Technologies:</strong> HTML5, CSS3, JavaScript, Bootstrap 5</li>
+                        <li><i class="bi bi-gear me-2"></i><strong>Features:</strong> Responsive design, dark mode, smooth page transitions, PDF export</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="container-fluid">
+        <p>&copy;<strong> 2025 Vu Phan Hoai Nam. All rights reserved!</strong></p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Load navigation JS first -->
+    <script src="../js/nav.js"></script>
+    <!-- Then load CV-specific JS -->
+    <script src="../js/cv.js"></script>
+</body>
+</html> 
