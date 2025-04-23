@@ -13,7 +13,7 @@
 ├── components/          # Chứa các thành phần có thể tái sử dụng
 │   └── nav.html         # Thành phần điều hướng (navigation)
 ├── css/                 # Chứa file CSS
-│   └── cv.css           # CSS chính của trang web
+│   └── styles.css           # CSS chính của trang web
 ├── js/                  # Chứa file JavaScript
 │   ├── cv.js            # JS xử lý chức năng chính của CV
 │   └── nav.js           # JS xử lý điều hướng và menu
@@ -21,14 +21,14 @@
 │   ├── about.html       # Trang giới thiệu
 │   ├── contact.html     # Trang liên hệ
 │   └── myproduct.html   # Trang sản phẩm
-└── cv.html              # Trang chính (trang chủ)
+└── index.html              # Trang chính (trang chủ)
 ```
 
 ## Luồng hoạt động
 
 ### 1. Tải trang
 
-Khi người dùng truy cập trang web, `cv.html` sẽ được tải đầu tiên. Quá trình tải diễn ra như sau:
+Khi người dùng truy cập trang web, `index.html` sẽ được tải đầu tiên. Quá trình tải diễn ra như sau:
 
 1. Tài liệu HTML được tải với các thẻ meta, tiêu đề, và các liên kết đến Bootstrap CSS, Bootstrap Icons và CSS tùy chỉnh.
 2. JavaScript được tải ở cuối trang, bao gồm Bootstrap JS, thư viện docx (để xuất file Word), nav.js và cv.js.
@@ -51,7 +51,7 @@ Thanh điều hướng được tải động bằng JavaScript (nav.js):
 
 1. Khi người dùng nhấp vào một liên kết điều hướng, sự kiện click được chặn lại và xử lý bởi hàm `navigateTo()`.
 2. Hàm này thêm hiệu ứng chuyển trang (làm mờ nội dung hiện tại).
-3. Nếu đích là trang chính (cv.html), trang được tải lại hoàn toàn.
+3. Nếu đích là trang chính (index.html), trang được tải lại hoàn toàn.
 4. Nếu đích là trang con, JavaScript tải nội dung của trang đó bằng AJAX mà không làm mới toàn bộ trang:
    - Kiểm tra bộ nhớ đệm (sessionStorage) xem trang đã được tải trước đó chưa
    - Nếu đã có trong bộ nhớ đệm, sử dụng nội dung đã lưu

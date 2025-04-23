@@ -1,12 +1,22 @@
 // Chức năng điều hướng
 document.addEventListener("DOMContentLoaded", function() {
     // Tải thanh điều hướng
-    fetch('components/nav.html')
-        .then(response => response.text())
-        .then(data => {
-            const navContainer = document.getElementById('nav-container');
-            if (navContainer) {
+    const navContainer = document.getElementById('nav-container');
+    if (navContainer) {
+        const navPath = window.location.pathname.includes('/views/') ? '../components/nav.html' : 'components/nav.html';
+        fetch(navPath)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Không thể tải nav.html');
+                }
+                return response.text();
+            })
+            .then(data => {
                 navContainer.innerHTML = data;
+                
+                // Fix đường dẫn ảnh logo và các liên kết menu khi ở trang con
+                fixNavPaths();
+                
                 // Thêm lớp "active" cho trang hiện tại
                 setActiveNavItem();
                 // Cài đặt sự kiện click cho logo
@@ -17,11 +27,11 @@ document.addEventListener("DOMContentLoaded", function() {
                 setupScrollToTopButton();
                 // Cài đặt hiệu ứng cuộn cho header
                 setupScrollHeader();
-            }
-        })
-        .catch(error => {
-            console.error('Lỗi khi tải thanh điều hướng:', error);
-        });
+            })
+            .catch(error => {
+                console.error('Lỗi khi tải thanh điều hướng:', error);
+            });
+    }
 
     // Xử lý sự kiện click vào các liên kết điều hướng
     document.addEventListener('click', function(e) {
@@ -135,7 +145,7 @@ function setupLogoClickHandler() {
                 window.location.reload();
             } else {
                 // Điều hướng về trang chính
-                window.location.href = isMainPage ? 'index.html' : '../index.html';
+                window.location.href = '../index.html';
             }
         });
     }
@@ -147,88 +157,34 @@ function navigateTo(path) {
     document.body.classList.add('page-transition');
     
     // Kiểm tra xem đang ở trang chính hay trang con
-    const isMainPage = window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/');
+    const currentPath = window.location.pathname;
+    const isMainPage = currentPath.endsWith('index.html') || currentPath.endsWith('/') || currentPath === '';
     
+    // Xử lý trường hợp đặc biệt cho index
     if (path === 'index.html' || path === '/index.html' || path === '/') {
-        // Nếu điều hướng đến trang chính, tải lại toàn bộ trang
         window.location.href = isMainPage ? 'index.html' : '../index.html';
         return;
     }
     
-    // Với các trang con, sử dụng AJAX để tải nội dung
-    const fullPath = isMainPage ? path : path.replace('../', '');
+    // Xử lý đường dẫn tương đối cho các trang con
+    let targetPath = path;
     
-    // Tạo bộ nhớ đệm để chuyển trang mượt mà hơn
-    const pageCache = sessionStorage.getItem(fullPath);
-    
-    const loadContent = (html) => {
-        // Lấy container chính để chèn nội dung
-        const mainContainer = document.querySelector('main');
-        
-        // Trích xuất nội dung phần section từ HTML
-        const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = html;
-        const sectionContent = tempDiv.querySelector('section');
-        
-        if (sectionContent) {
-            mainContainer.innerHTML = '';
-            mainContainer.appendChild(sectionContent);
-            
-            // Cập nhật URL mà không tải lại trang
-            const newUrl = isMainPage ? path : path.substring(path.lastIndexOf('/') + 1);
-            window.history.pushState({}, '', newUrl);
-            
-            // Cập nhật mục điều hướng đang hoạt động
-            setActiveNavItem();
-            
-            // Lưu nội dung vào bộ nhớ đệm
-            sessionStorage.setItem(fullPath, sectionContent.outerHTML);
-        } else {
-            console.error('Không tìm thấy nội dung section trong trang');
-            // Dự phòng: tải lại toàn bộ trang
-            window.location.href = path;
-        }
-        
-        // Loại bỏ hiệu ứng chuyển trang sau một khoảng thời gian ngắn
-        setTimeout(() => {
-            document.body.classList.remove('page-transition');
-        }, 300);
-    };
-    
-    if (pageCache) {
-        // Sử dụng nội dung đã lưu trong bộ nhớ đệm
-        const mainContainer = document.querySelector('main');
-        mainContainer.innerHTML = pageCache;
-        
-        // Cập nhật URL mà không tải lại trang
-        const newUrl = isMainPage ? path : path.substring(path.lastIndexOf('/') + 1);
-        window.history.pushState({}, '', newUrl);
-        
-        // Cập nhật mục điều hướng đang hoạt động
-        setActiveNavItem();
-        
-        // Loại bỏ hiệu ứng chuyển trang sau một khoảng thời gian ngắn
-        setTimeout(() => {
-            document.body.classList.remove('page-transition');
-        }, 300);
-    } else {
-        // Tải nội dung mới
-        fetch(path)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Phản hồi mạng không thành công');
-                }
-                return response.text();
-            })
-            .then(html => {
-                loadContent(html);
-            })
-            .catch(error => {
-                console.error('Lỗi khi tải trang:', error);
-                // Dự phòng: tải lại toàn bộ trang
-                window.location.href = path;
-            });
+    // Nếu đang ở trang chính và chuyển đến trang con trong thư mục views
+    if (isMainPage && path.includes('views/')) {
+        targetPath = path; // Giữ nguyên đường dẫn
+    } 
+    // Nếu đang ở trang con và chuyển đến trang con khác
+    else if (!isMainPage && path.includes('views/')) {
+        // Chuyển đổi đường dẫn tương đối
+        targetPath = path.replace('views/', '../views/');
     }
+    // Nếu đang ở trang con và đường dẫn không có 'views/'
+    else if (!isMainPage && !path.includes('../')) {
+        targetPath = '../' + path;
+    }
+    
+    console.log("Chuyển hướng đến:", targetPath);
+    window.location.href = targetPath;
 }
 
 // Xử lý nút quay lại/trước trên trình duyệt
@@ -263,6 +219,35 @@ function setActiveNavItem() {
             item.classList.add('active');
         } else {
             item.classList.remove('active');
+        }
+    });
+}
+
+// Hàm sửa đường dẫn cho logo và menu khi ở trang con
+function fixNavPaths() {
+    const isSubPage = window.location.pathname.includes('/views/');
+    
+    // Fix đường dẫn logo
+    const logoImg = document.querySelector('#logo-img');
+    if (logoImg && isSubPage) {
+        const currentSrc = logoImg.getAttribute('src');
+        if (!currentSrc.includes('../')) {
+            logoImg.src = '../' + currentSrc;
+        }
+    }
+    
+    // Fix đường dẫn trang chủ trong logo
+    const logoLink = document.querySelector('.nav-brand-link');
+    if (logoLink && isSubPage) {
+        logoLink.href = '../index.html';
+    }
+    
+    // Fix đường dẫn các menu item
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (isSubPage && href && href.includes('views/') && !href.includes('../')) {
+            link.href = '../' + href;
         }
     });
 }
